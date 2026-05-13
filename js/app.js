@@ -102,8 +102,8 @@ function extractBits(value, startBit, bitCount) {
 function drawEncodedLine(ctx, lineValue, bitsForLine) {
   const distribution = distributeLineBits(bitsForLine);
 
-  const xRaw = takeBits(lineValue, 0, distribution.x);
-  const yRaw = takeBits(lineValue, distribution.x, distribution.y);
+  const yRaw = takeBits(lineValue, 0, distribution.y);
+  const xRaw = takeBits(lineValue, distribution.y, distribution.x);
   const rotationRaw = takeBits(
     lineValue,
     distribution.x + distribution.y,
@@ -117,7 +117,7 @@ function drawEncodedLine(ctx, lineValue, bitsForLine) {
 
   const x = scaleInteger(xRaw, distribution.x, 0, CANVAS_SIZE);
   const y = scaleInteger(yRaw, distribution.y, 0, CANVAS_SIZE);
-  const rotation = scaleInteger(rotationRaw, distribution.rotation, 0, Math.PI * 2);
+  const rotation = scaleInteger(rotationRaw, distribution.rotation, 0, Math.PI * 1.5);
 
   const color = colorFromBits(colorRaw, distribution.color);
 
@@ -152,7 +152,7 @@ function distributeLineBits(bitsForLine) {
     color: 0,
   };
 
-  const order = ['x', 'y', 'rotation', 'color'];
+  const order = ['y', 'x', 'rotation', 'color'];
 
   for (let bitIndex = 0; bitIndex < clampedBits; bitIndex += 1) {
     distribution[order[bitIndex % order.length]] += 1;
