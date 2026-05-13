@@ -1,3 +1,5 @@
+Check the deployed program here: https://am-i-copyrightable-yet.amly-traveler.workers.dev/
+
 # How many bits of information are enough to become copyrightable?
 
 ## Threshold of originality
